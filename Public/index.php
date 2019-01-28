@@ -6,7 +6,7 @@
     }
     require_once ROOT_DIR.'/vendor/autoload.php';
     use Module\ProfilerModule\Services\Profiler;
-    use Module\RouterModule\Services\Router;
+    use Alzundaz\Router\Services\Router;
     if(isset($_GET['token'])){
         Profiler::getInstance()->profilerPage();
     } else {
