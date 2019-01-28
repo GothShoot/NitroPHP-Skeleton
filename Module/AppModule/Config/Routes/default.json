@@ -1,0 +1,4 @@
+[
+    {"name":"index", "module":"AppModule", "path":"", "controller":"DefaultController", "methode":"index", "parameters":{} },
+    {"name":"error", "module":"AppModule", "path":"error", "controller":"DefaultController", "methode":"error", "parameters":{} }
+]

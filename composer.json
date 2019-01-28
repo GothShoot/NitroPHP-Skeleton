@@ -1,0 +1,25 @@
+{
+  "name": "alzundaz/nitrophp-skeleton",
+  "description": "Modular app framework",
+  "type": "project",
+  "license": "MIT",
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "authors": [
+    {
+      "name": "GothShoot",
+      "email": "contact@nitroxgroup.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Module\\": "Module"
+    }
+  },
+  "require": {
+    "php": "^7.1",
+    "alzundaz/nitrophp": "dev-master"
+  },
+  "require-dev": {
+  }
+}

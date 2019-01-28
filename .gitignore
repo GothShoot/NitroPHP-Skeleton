@@ -1,0 +1,4 @@
+.tmp.drivedownload/
+Vendor/
+*.lock
+Var/*

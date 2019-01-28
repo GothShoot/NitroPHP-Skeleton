@@ -1,0 +1,5 @@
+{
+    "cachemode":true,
+    "dev":true, 
+    "database":{"dbhost":"", "dbuser":"", "dbpass":"", "dbname":"", "driver":"mysql"}
+}
