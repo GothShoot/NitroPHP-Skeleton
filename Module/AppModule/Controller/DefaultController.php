@@ -2,7 +2,7 @@
 
 namespace Module\AppModule\Controller;
 
-use Module\CoreModule\BaseClass\Controller;
+use Alzundaz\NitroPHP\BaseClass\Controller;
 
 class DefaultController extends Controller
 {
