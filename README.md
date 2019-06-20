@@ -47,7 +47,7 @@ Async periodic service
 NitroPHP skeleton implementing async symfony command call, this is called from unique instantied kernel of the server
 and is more speed than using Cron (for linux) or planified task (for windows)
 
-For configuring an periodic call, edit /config/package/periodic_timer like this :
+For configuring an periodic call, edit /config/package/periodic_timer.yaml like this :
 ```yaml
 parameters:
   loop:
