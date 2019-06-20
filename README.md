@@ -13,7 +13,7 @@ Instalation
 =
 you can install this skeleton by using composer by using :
 ```CMD
-composer create-project composer create-project alzundaz/nitrophp-skeleton
+composer create-project plume-solution/nitrophp-skeleton
 ```
 Usage
 =
