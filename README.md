@@ -1,1 +1,67 @@
 # NitroPHP-Skeleton
+
+[![PHP version](https://badge.fury.io/ph/alzundaz%2Fnitrophp-skeleton.svg)](https://badge.fury.io/ph/alzundaz%2Fnitrophp-skeleton)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+[![SymfonyInsight](https://insight.symfony.com/projects/417d50c4-b1ea-465c-a0a4-6df0ef25f668/mini.svg)](https://insight.symfony.com/projects/417d50c4-b1ea-465c-a0a4-6df0ef25f668)
+[![Maintainability](https://api.codeclimate.com/v1/badges/bbfc927ae160d900b9a3/maintainability)](https://codeclimate.com/github/Alzundaz/NitroPHP-Skeleton/maintainability)
+
+NitroPHP skeleton is a skeleton for Symfony enpowered by ReactPHP for ultimate performance.
+
+It use an great asyncronous server for managing request->response cycle and implementing an asynchronous periodic timer based command launching for recurrent task.
+
+Instalation
+=
+you can install this skeleton by using composer by using :
+```CMD
+composer create-project composer create-project alzundaz/nitrophp-skeleton
+```
+Usage
+=
+server
+-
+Server is simply to use, it is a script in bin directory.
+
+For launching, just use : 
+```CMD
+php bin/react
+``` 
+It use the kernel in a separate process for handle request ike the original index.php of symfony.
+
+For now it is unable to stream assets, please use for api server only. Don't worry, this is future planned
+
+Please refer to original documentation of symfony for create your first controller :
+https://symfony.com/doc/current/page_creation.html
+
+If you need a specific configuration on the server, you can edit /config/package/server.yaml like this :
+```yaml
+parameters:
+  loop:
+    server:
+      url: 'http://127.0.0.1'
+      port: 9000
+```
+
+Async periodic service
+-
+NitroPHP skeleton implementing async symfony command call, this is called from unique instantied kernel of the server
+and is more speed than using Cron (for linux) or planified task (for windows)
+
+For configuring an periodic call, edit /config/package/periodic_timer like this :
+```yaml
+parameters:
+  loop:
+    timer:
+      mySuperService: #just using for clean config
+        input: 'app:my:super:command' #command to call from console
+        time: 60 #time in second before call another time the command
+```
+See Official documentation for creating your first command : https://symfony.com/doc/current/console.html#creating-a-command
+
+Future planned
+=
+* Unit test
+* Assets stream on the server
+* Performance improvement
+* On update reboot
+* Many cool project using NitroPHP :sunglasses:
+* and your suggest :grin:
