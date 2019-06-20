@@ -7,9 +7,9 @@
 
 NitroPHP skeleton is a skeleton for Symfony enpowered by ReactPHP for ultimate performance.
 
-It use an great asyncronous server for managing request->response cycle and implementing an asynchronous periodic timer based command launching for recurrent task.
+It uses an great asynchronous server for managing request->response cycle and implementing an asynchronous periodic timer based command launching for recurrent task.
 
-Instalation
+Installation
 =
 you can install this skeleton by using composer by using :
 ```CMD
