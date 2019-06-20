@@ -1,19 +1,27 @@
 <?php
-    $start = microtime(true);
-    if(!defined ( 'ROOT_DIR' )){
-        define('ROOT_DIR', __DIR__.'/..');
-        define('WEBROOT_DIR', ROOT_DIR.'/Public');
-    }
-    require_once ROOT_DIR.'/vendor/autoload.php';
-    use Module\ProfilerModule\Services\Profiler;
-    use Alzundaz\Router\Services\Router;
-    if(isset($_GET['token'])){
-        Profiler::getInstance()->profilerPage();
-    } else {
-        $router=new Router();
-        $router->getController();
-        $end = microtime(true);
-        Profiler::getInstance()->setTime(['name'=>'App', 'start'=>$start, 'end'=>$end]);
-        Profiler::getInstance()->profileBar();
-    }
-?>
+
+use App\Kernel;
+use Symfony\Component\Debug\Debug;
+use Symfony\Component\HttpFoundation\Request;
+
+require dirname(__DIR__).'/config/bootstrap.php';
+
+if ($_SERVER['APP_DEBUG']) {
+    umask(0000);
+
+    Debug::enable();
+}
+
+if ($trustedProxies = $_SERVER['TRUSTED_PROXIES'] ?? $_ENV['TRUSTED_PROXIES'] ?? false) {
+    Request::setTrustedProxies(explode(',', $trustedProxies), Request::HEADER_X_FORWARDED_ALL ^ Request::HEADER_X_FORWARDED_HOST);
+}
+
+if ($trustedHosts = $_SERVER['TRUSTED_HOSTS'] ?? $_ENV['TRUSTED_HOSTS'] ?? false) {
+    Request::setTrustedHosts([$trustedHosts]);
+}
+
+$kernel = new Kernel($_SERVER['APP_ENV'], (bool) $_SERVER['APP_DEBUG']);
+$request = Request::createFromGlobals();
+$response = $kernel->handle($request);
+$response->send();
+$kernel->terminate($request, $response);

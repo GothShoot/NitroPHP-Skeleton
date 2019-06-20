@@ -1,0 +1,27 @@
+parameters:
+
+doctrine:
+    dbal:
+        # configure these for your database server
+        dbname: '%env(DB_NAME)%'
+        host: '%env(DB_HOST)%'
+        port: '%env(DB_PORT)%'
+        user: '%env(DB_USER)%'
+        password: '%env(DB_PASS)%'
+        driver: 'pdo_mysql'
+        server_version: '%env(DB_VERSION)%'
+        charset: utf8
+
+    orm:
+        auto_generate_proxy_classes: '%kernel.debug%'
+        naming_strategy: doctrine.orm.naming_strategy.underscore
+        metadata_cache_driver: apcu
+        result_cache_driver: apcu
+        query_cache_driver: apcu
+        auto_mapping: true
+        mappings:
+            App:
+                is_bundle: false
+                type: xml
+                dir: '%kernel.project_dir%/config/entity'
+                prefix: App\Entity
