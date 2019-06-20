@@ -62,9 +62,8 @@ class LoopManager
     private function attachTimer()
     {
         $kernel = $this->kernel;
-//        var_dump($kernel);
         $params = $kernel->getLoopTimerConfig();
-        foreach ($params as $key => $param)
+        foreach ($params as $param)
             $this->loop->addPeriodicTimer($param['timer'], function($param) use ($kernel)
                 {
                     $application = new Application($kernel);

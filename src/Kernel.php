@@ -65,8 +65,8 @@ class Kernel extends BaseKernel
     public function getSocketServerConfig()
     {
         return (
-            $this->container->hasParameter('loop.timer') ?
-                $this->container->getParameter('loop.timer') :
+            $this->container->hasParameter('loop.server') ?
+                $this->container->getParameter('loop.server') :
                 ['port' => 8000, 'url' => 'http://127.0.0.1']
 
         );
