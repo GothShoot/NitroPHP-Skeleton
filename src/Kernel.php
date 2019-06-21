@@ -15,10 +15,21 @@ class Kernel extends BaseKernel
 {
     use MicroKernelTrait;
 
+    /**
+     * Config extention usable
+     */
     private const CONFIG_EXTS = '.{php,xml,yaml,yml}';
 
+    /**
+     * count of query
+     *
+     * @var int
+     */
     private $count = 0;
 
+    /**
+     * Kernel constructor.
+     */
     public function __construct()
     {
         $this->init();
@@ -62,6 +73,9 @@ class Kernel extends BaseKernel
         );
     }
 
+    /**
+     * @return array
+     */
     public function getSocketServerConfig()
     {
         return (
@@ -72,6 +86,9 @@ class Kernel extends BaseKernel
         );
     }
 
+    /**
+     * @return iterable
+     */
     public function registerBundles(): iterable
     {
         $contents = require $this->getProjectDir().'/config/bundles.php';
@@ -82,11 +99,19 @@ class Kernel extends BaseKernel
         }
     }
 
+    /**
+     * @return string
+     */
     public function getProjectDir(): string
     {
         return \dirname(__DIR__);
     }
 
+    /**
+     * @param ContainerBuilder $container
+     * @param LoaderInterface $loader
+     * @throws \Exception
+     */
     protected function configureContainer(ContainerBuilder $container, LoaderInterface $loader): void
     {
         $container->addResource(new FileResource($this->getProjectDir().'/config/bundles.php'));
@@ -99,6 +124,10 @@ class Kernel extends BaseKernel
         $loader->load($confDir.'/{services}_'.$this->environment.self::CONFIG_EXTS, 'glob');
     }
 
+    /**
+     * @param RouteCollectionBuilder $routes
+     * @throws \Symfony\Component\Config\Exception\LoaderLoadException
+     */
     protected function configureRoutes(RouteCollectionBuilder $routes): void
     {
         $confDir = $this->getProjectDir().'/config';
@@ -108,11 +137,17 @@ class Kernel extends BaseKernel
         $routes->import($confDir.'/{routes}'.self::CONFIG_EXTS, '/', 'glob');
     }
 
+    /**
+     *
+     */
     public function incrementCount()
     {
         $this->count++;
     }
-    
+
+    /**
+     * @return int
+     */
     public function getCount()
     {
         return $this->count;
