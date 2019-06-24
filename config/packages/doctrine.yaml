@@ -19,9 +19,3 @@ doctrine:
         result_cache_driver: apcu
         query_cache_driver: apcu
         auto_mapping: true
-        mappings:
-            App:
-                is_bundle: false
-                type: xml
-                dir: '%kernel.project_dir%/config/entity'
-                prefix: App\Entity
