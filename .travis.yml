@@ -3,6 +3,9 @@ language: php
 addons:
   chrome: stable
   
+rvm:
+  - 2.2.0
+  
 env:
   global:
     CC_TEST_REPORTER_ID=f2a66fd21b4fdfd1cf949deea3850f2fe8ae080e1148b3d843bb7b7eb91b2e4e
@@ -14,7 +17,12 @@ before_install:
   #- export DISPLAY=:99.0                # Display number for xvfb (for headless browser testing)
   #- sh -e /etc/init.d/xvfb start        # Start xvfb (for headless browser testing)
   
-  after_script:
+install:
+  - bundle install --without production --path=${BUNDLE_PATH:-vendor/bundle}  # Install ruby gems, excluding production only gems such as unicorn (already present by default in Travis)
+  - npm install                         # Install npm dependencies
+  #- npm install karma-firefox-launcher codeclimate-test-reporter
+  
+after_script:
   - ./cc-test-reporter format-coverage -t simplecov -o coverage/codeclimate.backend.json coverage/backend/.resultset.json # Format backend coverage
   - ./cc-test-reporter format-coverage -t lcov -o coverage/codeclimate.frontend.json coverage/frontend/lcov.info  # Format frontend coverage
   - ./cc-test-reporter sum-coverage coverage/codeclimate.*.json -p 2                  # Sum both coverage parts into coverage/codeclimate.json
