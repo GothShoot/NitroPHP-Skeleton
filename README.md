@@ -2,7 +2,6 @@
 
 ![GitHub release](https://img.shields.io/github/release/PlumeSolution/nitrophp-skeleton.svg?style=popout)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
-[![SymfonyInsight](https://insight.symfony.com/projects/417d50c4-b1ea-465c-a0a4-6df0ef25f668/mini.svg)](https://insight.symfony.com/projects/417d50c4-b1ea-465c-a0a4-6df0ef25f668)
 [![Maintainability](https://api.codeclimate.com/v1/badges/bbfc927ae160d900b9a3/maintainability)](https://codeclimate.com/github/Alzundaz/NitroPHP-Skeleton/maintainability)
 ![Packagist](https://img.shields.io/packagist/dt/plume-solution/nitrophp-skeleton.svg?style=popout)
 
