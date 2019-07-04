@@ -3,7 +3,7 @@ language: php
 addons:
   chrome: stable
   
-rvm:
+nvm:
   - 2.2.0
   
 env:
