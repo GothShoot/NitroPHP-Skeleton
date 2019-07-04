@@ -1,5 +1,11 @@
 language: php
 
+php:
+  - hhvm
+  - 7.2
+  - 7.3
+  - 7.4
+
 addons:
   chrome: stable
   
@@ -14,7 +20,9 @@ before_install:
   
 install:
   - composer update
-
+  
+script:
+  - php bin/phpunit
   
 after_script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
