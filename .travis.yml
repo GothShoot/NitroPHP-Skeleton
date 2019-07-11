@@ -20,6 +20,7 @@ install:
   - composer update
   
 script:
+  - composer test
   - php bin/phpunit
   
 after_script:
