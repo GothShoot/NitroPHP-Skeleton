@@ -3,7 +3,7 @@
 ![GitHub release](https://img.shields.io/github/release/PlumeSolution/nitrophp-skeleton.svg?style=popout)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![Maintainability](https://api.codeclimate.com/v1/badges/283cc106bd1051620804/maintainability)](https://codeclimate.com/github/PlumeSolution/NitroPHP-Skeleton/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/283cc106bd1051620804/test_coverage)](https://codeclimate.com/github/PlumeSolution/NitroPHP-Skeleton/test_coverage)
+[![Build Status](https://travis-ci.org/PlumeSolution/NitroPHP-Skeleton.svg?branch=master)](https://travis-ci.org/PlumeSolution/NitroPHP-Skeleton)
 ![Packagist](https://img.shields.io/packagist/dt/plume-solution/nitrophp-skeleton.svg?style=popout)
 
 NitroPHP skeleton is a skeleton for Symfony enpowered by ReactPHP for ultimate performance.
