@@ -17,7 +17,7 @@ before_install:
   
 install:
   - composer global require hirak/prestissimo
-  - php -d memory_limit=-1 /usr/local/bin/composer update
+  - php -d memory_limit=-1 /home/travis/.phpenv/versions/7.4/bin/composer update
   
 script:
   - php bin/phpunit
