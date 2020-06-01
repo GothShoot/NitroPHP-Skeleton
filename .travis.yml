@@ -16,6 +16,7 @@ before_install:
   - ./cc-test-reporter before-build
   
 install:
+  - composer global require hirak/prestissimo
   - composer update
   
 script:
