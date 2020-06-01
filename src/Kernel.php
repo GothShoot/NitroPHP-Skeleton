@@ -2,12 +2,14 @@
 
 namespace App;
 
+use Exception;
+use Generator;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
+use Symfony\Component\Config\Exception\LoaderLoadException;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\Config\Resource\FileResource;
-use Symfony\Component\Debug\Debug;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\Dotenv\Dotenv;
+use Symfony\Component\HttpKernel\Bundle\BundleInterface;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
 use Symfony\Component\Routing\RouteCollectionBuilder;
 
@@ -18,85 +20,42 @@ class Kernel extends BaseKernel
     /**
      * Config extention usable
      */
-    private const CONFIG_EXTS = '.{php,xml,yaml,yml}';
+    private const CONFIG_EXTS = '.{php,xml,yaml,yml,json}';
 
     /**
-     * count of query
-     *
-     * @var int
+     * @return string
      */
-    private $count = 0;
-
-    /**
-     * Kernel constructor.
-     */
-    public function __construct()
+    public function getCacheDir()
     {
-        $this->init();
-        $env = $_SERVER['APP_ENV'] ?? 'prod';
-        $debug = (bool) ($_SERVER['APP_DEBUG'] ?? ('prod' !== $env));
-        if ($debug)
-        {
-            umask(0000);
-            Debug::enable();
-        }
-        parent::__construct($env, $debug);
-        $this->boot();
+        return $this->getProjectDir() . '/var/cache/' . $this->environment;
     }
 
     /**
-     * init ENV
+     * @return string
      */
-    private function init()
+    public function getLogDir()
     {
-        if (!isset($_SERVER['APP_ENV']))
+        return $this->getProjectDir() . '/var/log';
+    }
+
+    /**
+     * @return Generator|iterable|BundleInterface[]
+     */
+    public function registerBundles()
+    {
+        $contents = require $this->getProjectDir() . '/config/bundles.php';
+        foreach ($contents as $class => $envs)
         {
-            if (!class_exists(Dotenv::class))
+            if (isset($envs['all']) || isset($envs[$this->environment]))
             {
-                throw new \RuntimeException('APP_ENV environment variable is not defined. You need to define environment variables for configuration or add "symfony/dotenv" as a Composer dependency to load variables from a .env file.');
-            }
-            (new Dotenv())->load(__DIR__.'/../.env');
-        }
-    }
-
-    /**
-     * Get loop timer parameter from container
-     *
-     * @return array $LoopTimerParameter
-     */
-    public function getLoopTimerConfig()
-    {
-        return (
-            $this->container->hasParameter('loop.timer') ?
-                $this->container->getParameter('loop.timer') :
-                []
-        );
-    }
-
-    /**
-     * @return array
-     */
-    public function getSocketServerConfig()
-    {
-        return (
-            $this->container->hasParameter('loop.server') ?
-                $this->container->getParameter('loop.server') :
-                ['port' => 8000, 'url' => 'http://127.0.0.1']
-
-        );
-    }
-
-    /**
-     * @return iterable
-     */
-    public function registerBundles(): iterable
-    {
-        $contents = require $this->getProjectDir().'/config/bundles.php';
-        foreach ($contents as $class => $envs) {
-            if ($envs[$this->environment] ?? $envs['all'] ?? false) {
                 yield new $class();
             }
         }
+    }
+
+    public function registerModule()
+    {
+
     }
 
     /**
@@ -110,7 +69,7 @@ class Kernel extends BaseKernel
     /**
      * @param ContainerBuilder $container
      * @param LoaderInterface $loader
-     * @throws \Exception
+     * @throws Exception
      */
     protected function configureContainer(ContainerBuilder $container, LoaderInterface $loader): void
     {
@@ -126,7 +85,7 @@ class Kernel extends BaseKernel
 
     /**
      * @param RouteCollectionBuilder $routes
-     * @throws \Symfony\Component\Config\Exception\LoaderLoadException
+     * @throws LoaderLoadException
      */
     protected function configureRoutes(RouteCollectionBuilder $routes): void
     {
@@ -135,21 +94,5 @@ class Kernel extends BaseKernel
         $routes->import($confDir.'/{routes}/'.$this->environment.'/**/*'.self::CONFIG_EXTS, '/', 'glob');
         $routes->import($confDir.'/{routes}/*'.self::CONFIG_EXTS, '/', 'glob');
         $routes->import($confDir.'/{routes}'.self::CONFIG_EXTS, '/', 'glob');
-    }
-
-    /**
-     *
-     */
-    public function incrementCount()
-    {
-        $this->count++;
-    }
-
-    /**
-     * @return int
-     */
-    public function getCount()
-    {
-        return $this->count;
     }
 }
