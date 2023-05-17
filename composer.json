@@ -22,7 +22,7 @@
         "ext-iconv": "*",
         "nyholm/psr7": "^1.1",
         "plume-solution/async": "dev-master",
-        "react/http": "^0.8.4",
+        "react/http": "^1.9.0",
         "sensio/framework-extra-bundle": "^5.3",
         "symfony/console": "^5.0",
         "symfony/dotenv": "^5.0",
