@@ -24,15 +24,15 @@
         "plume-solution/async": "dev-master",
         "react/http": "^0.8.4",
         "sensio/framework-extra-bundle": "^5.3",
-        "symfony/console": "^5.0",
-        "symfony/dotenv": "^5.0",
-        "symfony/framework-bundle": "^5.0",
+        "symfony/console": "^7.0",
+        "symfony/dotenv": "^7.0",
+        "symfony/framework-bundle": "^7.0",
         "symfony/monolog-bundle": "^3.3",
-        "symfony/orm-pack": "^1.0",
-        "symfony/psr-http-message-bridge": "^1.2",
+        "symfony/orm-pack": "^2.0",
+        "symfony/psr-http-message-bridge": "^7.0",
         "symfony/security-bundle": "^5.0",
-        "symfony/validator": "^5.0",
-        "symfony/yaml": "^5.0",
+        "symfony/validator": "^7.0",
+        "symfony/yaml": "^7.0",
         "symfony/twig-pack": "^1.0"
     },
     "config": {
@@ -86,6 +86,6 @@
       "symfony/maker-bundle": "^1.0",
       "symfony/profiler-pack": "^1.0",
       "symfony/test-pack": "^1.0",
-      "symfony/flex": "^1.0"
+      "symfony/flex": "^2.0"
     }
 }
